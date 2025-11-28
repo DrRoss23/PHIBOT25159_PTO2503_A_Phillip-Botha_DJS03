@@ -43,3 +43,61 @@
   font-size: 1rem;
   line-height: 1.4;
 }
+
+/* existing .podcast-card styles ... */
+
+.podcast-card {
+  background-color: #1f1f1f;
+  padding: 0;               /* we’ll control padding inside */
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cover image */
+.podcast-card__image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Content area below image */
+.podcast-card__body {
+  padding: 0.75rem 0.9rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.podcast-card__title {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.podcast-card__seasons {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.podcast-card__genres {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0.15rem 0;
+  padding: 0;
+}
+
+.podcast-card__genre-tag {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+  background-color: #2b2b2b;
+}
+
+.podcast-card__updated {
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
