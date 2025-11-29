@@ -5,14 +5,16 @@ const PODCAST_API_URL = "https://podcast-api.netlify.app/";
 /**
  * Fetches podcast data from the external podcast API.
  *
- * This function uses the Fetch API to request JSON data from the
- * podcast endpoint. It throws an error if the response is not OK
- * (for example, if the server returns a 4xx or 5xx status).
+ * This function is responsible for making a single HTTP GET request
+ * to the podcast endpoint and converting the JSON response into a
+ * JavaScript value.
+ *
+ * It throws a normal Error if something goes wrong so that the caller
+ * (for example App.jsx) can decide how to handle the problem in the UI.
  *
  * @async
- * @returns {Promise<unknown>} A promise that resolves to the parsed JSON
- *   data returned by the podcast API. The exact shape of the data is
- *   defined by the API.
+ * @returns {Promise<Array<object>>} A promise that resolves to an array
+ *   of podcast objects returned by the API.
  * @throws {Error} If the network request fails or the response is not OK.
  */
 export async function fetchPodcasts() {

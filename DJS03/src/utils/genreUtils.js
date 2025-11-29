@@ -3,8 +3,8 @@
 /**
  * Maps numeric genre IDs from the podcast API to human-readable titles.
  *
- * The IDs and names are taken from the official podcast API documentation.
- * Keeping the mapping in one place makes it easy to update in the future.
+ * Keeping the mapping in one place makes it easy to update later if
+ * the API adds or changes genres.
  *
  * @type {Record<number, string>}
  */
@@ -21,13 +21,13 @@ export const GENRE_TITLES = {
 };
 
 /**
- * Converts an array of numeric genre IDs into an array of readable genre titles.
+ * Converts an array of numeric genre IDs into readable genre titles.
  *
- * Any IDs that are not recognised will be skipped. This keeps the UI clean
- * even if the API adds new genres we have not mapped yet.
+ * Any IDs that are not recognised in {@link GENRE_TITLES} are skipped.
+ * This stops unknown IDs from showing as "undefined" in the UI.
  *
  * @param {number[]} genreIds - List of numeric genre IDs from the API.
- * @returns {string[]} Array of genre titles that can be shown to the user.
+ * @returns {string[]} Array of genre titles suitable for display.
  */
 export function getGenreTitlesFromIds(genreIds) {
   if (!Array.isArray(genreIds)) {

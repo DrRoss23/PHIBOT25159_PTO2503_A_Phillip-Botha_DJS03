@@ -3,40 +3,36 @@ import { getGenreTitlesFromIds } from "../utils/genreUtils.js";
 import { formatLastUpdated } from "../utils/dateUtils.js";
 
 /**
- * Displays a detailed preview of a single podcast.
+ * @typedef {Object} Podcast
+ * @property {number} id - Unique numeric identifier for the podcast.
+ * @property {string} title - Title of the podcast show.
+ * @property {string} image - URL for the podcast cover image.
+ * @property {number} seasons - Number of seasons available.
+ * @property {number[]} genres - List of numeric genre IDs for this show.
+ * @property {string} updated - ISO date string for the last update.
+ */
+
+/**
+ * Displays a detailed preview card for a single podcast.
  *
- * This card shows:
- * - The podcast cover image
- * - The podcast title
+ * The card shows:
+ * - Cover image
+ * - Title
  * - Number of seasons
- * - Genre titles
- * - Last updated date in a human-readable format
+ * - Genre tags
+ * - Last updated text
  *
- * It receives a full podcast object from the API via props and
- * uses simple helper functions to convert genre IDs and dates
- * into text that is easy for users to understand.
+ * It does not fetch any data by itself. All information is received
+ * from the parent component via the `podcast` prop.
  *
  * @param {Object} props - React props object.
- * @param {Object} props.podcast - The podcast data to display.
- * @param {string} props.podcast.title - Title of the podcast.
- * @param {string} props.podcast.image - URL to the podcast cover image.
- * @param {number} props.podcast.seasons - Number of seasons available.
- * @param {number[]} props.podcast.genres - List of numeric genre IDs.
- * @param {string} props.podcast.updated - ISO date string of last update.
- * @returns {JSX.Element} A detailed podcast preview card.
+ * @param {Podcast} props.podcast - Podcast data to display.
+ * @returns {JSX.Element} A styled podcast preview card.
  */
 function PodcastCard({ podcast }) {
-  const {
-    title,
-    image,
-    seasons,
-    genres,
-    updated,
-  } = podcast;
+  const { title, image, seasons, genres, updated } = podcast;
 
-  const seasonLabel =
-    seasons === 1 ? "1 season" : `${seasons} seasons`;
-
+  const seasonLabel = seasons === 1 ? "1 season" : `${seasons} seasons`;
   const genreTitles = getGenreTitlesFromIds(genres);
   const lastUpdatedText = formatLastUpdated(updated);
 
@@ -54,9 +50,7 @@ function PodcastCard({ podcast }) {
           {title || "Untitled podcast"}
         </h2>
 
-        <p className="podcast-card__seasons">
-          {seasonLabel}
-        </p>
+        <p className="podcast-card__seasons">{seasonLabel}</p>
 
         {genreTitles.length > 0 && (
           <ul className="podcast-card__genres">
@@ -71,9 +65,7 @@ function PodcastCard({ podcast }) {
           </ul>
         )}
 
-        <p className="podcast-card__updated">
-          {lastUpdatedText}
-        </p>
+        <p className="podcast-card__updated">{lastUpdatedText}</p>
       </div>
     </article>
   );

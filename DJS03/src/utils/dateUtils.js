@@ -3,9 +3,8 @@
 /**
  * Formats an ISO date string from the API into a simple
  * "Updated X days/months/years ago" style message.
- *
- * The logic here is intentionally simple so that it is easy to
- * read and explain during code reviews.
+ * This function calculates the difference between the
+ * current date and the provided date to generate a relative time string.
  *
  * @param {string} isoDateString - Date string from the API (e.g. "2022-11-03T07:00:00.000Z").
  * @returns {string} Human-readable text describing how long ago the show was updated.

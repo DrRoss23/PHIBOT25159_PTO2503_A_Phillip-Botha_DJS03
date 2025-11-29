@@ -1,3 +1,4 @@
+// src/App.jsx
 import { useEffect, useState } from "react";
 import { fetchPodcasts } from "./api/podcastApi";
 import PodcastGrid from "./components/PodcastGrid.jsx";
@@ -6,12 +7,16 @@ import "./App.css";
 /**
  * Root component for the React Podcast Landing Page.
  *
- * Handles:
- * - Fetching podcast data from the external API.
- * - Managing loading, error, and podcast state.
- * - Passing podcast data to child components.
+ * Responsibilities:
+ * - Fetch podcast data from the external API when the app first loads.
+ * - Manage loading, error, and podcast list state with useState.
+ * - Decide what to render for loading/error/empty states.
+ * - Pass the final podcast list into child components for display.
  *
- * @returns {JSX.Element} The full app layout.
+ * This component does not contain any layout-specific CSS logic;
+ * styling is handled in App.css.
+ *
+ * @returns {JSX.Element} The complete app layout.
  */
 function App() {
   const [podcasts, setPodcasts] = useState([]);
@@ -19,6 +24,18 @@ function App() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    /**
+     * Loads podcast data from the API and updates component state.
+     *
+     * This inner function exists because useEffect itself cannot be
+     * declared async. It performs three main tasks:
+     * - Sets loading state to true
+     * - Calls fetchPodcasts()
+     * - Handles success and error outcomes
+     *
+     * @async
+     * @returns {Promise<void>}
+     */
     async function loadPodcasts() {
       try {
         setIsLoading(true);
@@ -38,10 +55,12 @@ function App() {
       }
     }
 
+    // Run once when the component is first mounted.
     loadPodcasts();
   }, []);
 
-  /* Loading / Error / Empty States ------------------------------------ */
+  // ----- Loading / error / empty states -------------------------------
+
   if (isLoading)
     return <p className="status-message">Loading podcasts...</p>;
 
@@ -50,7 +69,7 @@ function App() {
   if (podcasts.length === 0)
     return <p className="status-message">No podcasts found.</p>;
 
-  /* Main App ----------------------------------------------------------- */
+  // ----- Main app content ---------------------------------------------
 
   return (
     <main className="app">
@@ -62,7 +81,6 @@ function App() {
           </p>
         </header>
 
-        {/* Podcast Grid */}
         <PodcastGrid podcasts={podcasts} />
       </div>
     </main>
