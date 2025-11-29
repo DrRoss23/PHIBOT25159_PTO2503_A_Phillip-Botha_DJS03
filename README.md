@@ -1,79 +1,147 @@
-# DJS02 Web Component Podcast Preview
+🎧 React Podcast Landing Page
 
-This project is a **modular Vanilla JavaScript application** that uses a custom **Web Component** to render podcast cards. It embraces modern web standards such as **Shadow DOM**, **custom elements**, and **event-driven UI** design.
+A responsive, data-driven podcast discovery landing page built with React, featuring dynamic API fetching, reusable components, and polished UI design.
 
-This version improves on DJS01 by replacing factory-based card rendering with a reusable `<podcast-card>` Web Component.
+This project was developed for DJS03 and demonstrates key front-end skills including:
 
----
+Data fetching with useEffect
 
-## Features
+State management with useState
 
-- Displays a responsive grid of podcast cards using a custom element
-- Dispatches `podcast-selected` event when a card is clicked
-- Uses utility services for formatting dates and resolving genre names
-- Opens a modal with detailed information
-- Emphasizes **modularity**, **encapsulation**, and **event-driven architecture**
+Modular React architecture
 
----
+Responsive design with CSS Grid
 
-## Project Structure
+Clean, readable, well-documented code using JSDoc
 
-```
-/src
+src/
 │
-├── /components
-│ ├── PodcastCard.js # Web Component for podcast preview
-│ └── createModal.js # Factory for modal control (open/close)
+├── api/
+│   └── podcastApi.js        # Fetch helper using Fetch API
 │
-├── /utils
-│ ├── DateUtils.js # Formats podcast dates
-│ └── GenreService.js # Maps genre IDs to readable names
+├── components/
+│   ├── PodcastCard.jsx       # Displays a single podcast preview
+│   └── PodcastGrid.jsx       # Renders the responsive grid of cards
 │
-├── /views
-│ └── createGrid.js # Places podcast-card elements into the page
+├── utils/
+│   ├── dateUtils.js          # Formats last-updated date
+│   └── genreUtils.js         # Maps genre IDs → readable genre names
 │
-├── data.js # Sample podcast and genre data
-└── index.js # App entry point
-```
+├── App.jsx                   # Root component with data fetching + state
+├── App.css                   # Full responsive styling
+└── main.jsx                  # React root entry point
 
----
+📡 Data Source
 
-## How it Works
+All podcast data comes from the official API:
+https://podcast-api.netlify.app/
+The app fetches the data on initial load using useEffect, stores it in state, and passes it into reusable components.
 
-### `<podcast-card>` Web Component
+⭐ Features
+🔄 Dynamic Data Fetching
+Automatically retrieves a list of podcasts from an external API.
+Loading state displayed while data is retrieved.
+Friendly error message if the API fails.
+Handles empty results gracefully.
+🧱 Reusable Component Architecture
+<PodcastGrid /> handles layout only.
+<PodcastCard /> handles rendering a single card.
+Following React best practices: UI = pure components, logic = App.jsx.
 
-The `PodcastCard.js` module defines a fully encapsulated Web Component using the Shadow DOM. It takes in podcast data via `setPodcast(podcast)` and renders a stylized preview card.
 
-When clicked, it dispatches a custom `podcast-selected` event containing the podcast data:
+🏷️ Rich Podcast Preview Cards
+Each card displays:
+Cover image
+Podcast title
+Number of seasons
+Human-readable genre tags
+“Updated X days/months/years ago”
+All formatting is handled by helper utilities for clean code.
 
-```js
-const card = document.createElement("podcast-card");
-card.setPodcast(podcastData);
-card.addEventListener("podcast-selected", (e) => {
-  console.log("Podcast clicked:", e.detail);
-});
-```
+📱 Fully Responsive Layout
 
-This makes it easy to plug into any system that listens for podcast selection.
+CSS Grid with custom column breakpoints
+1 column (mobile) → 2 → 3 → 4 → 5 columns on ultrawide desktops
+Clean spacing, modern card design, hover effects
 
-### Grid Rendering with `createGrid`
 
-The `createGrid` factory is responsible for rendering a list of podcast cards into a container. It does this by:
+🧼 JSDoc Documentation
 
-- Creating a `<podcast-card>` for each podcast in the list
-- Setting its data using s`etPodcast(podcast)`
-- Listening for the `podcast-selected` event to open a modal
+Every major function and component includes:
+JSDoc parameters
+return types
+detailed descriptions
+This ensures readability and makes the code easy to explain.
 
-## Learning Goals
 
-- Learn how to create reusable Web Components with encapsulated styles and logic
-- Apply Shadow DOM for style isolation
-- Communicate between components using custom events
-- Build composable UI modules using factory functions
+🧩 User Stories (DJS03 Rubric Mapping)
+Code	Description	Status
+P3.36	Fetch podcast data from an API	✅ Completed
+P3.37	Display loading state	✅
+P3.38	Show error state if fetch fails	✅
+P3.39	Fetch using useEffect + store using useState	✅
+P3.40	Display grid of podcast previews	✅
+P3.41	Use reusable React components	✅
+P3.42–P3.47	Display image, title, seasons, genres, last updated	✅
+P3.48	Clean layout	✅
+P3.49	Responsive grid	✅
+P3.50	Consistent fonts, spacing, colour scheme	✅
+P3.51	JSDoc documentation	✅
+P3.52	Consistent code formatting	✅
 
-## How to Run
+🛠️ Technologies Used
+React (Vite)
+JavaScript (ES6+)
+CSS Grid / Flexbox
+Fetch API
+JSDoc
+Custom utility modules
 
-1. Clone this project or open it locally.
-2. Open index.html in your browser.
-3. Browse the podcast cards and click one to open details.
-4. Close the modal to return to the list.
+
+🧪 How to Run Locally
+
+# Clone the repo
+git clone https://github.com/yourusername/djs03-react-podcast.git
+# Go into the project
+cd djs03-react-podcast
+# Install dependencies
+npm install
+# Run development server
+npm run dev
+
+Then open:
+👉 http://localhost:5173/
+
+
+🖱️ How to Interact With the App
+
+Visit the landing page
+The app will automatically fetch all podcasts
+You’ll first see:
+Loading message
+Then the full grid of podcast cards
+Scroll through and explore:
+Titles
+Seasons
+Genre tags
+Last updated date
+Resize the window to see the responsive grid adjust
+
+This is a simple landing page the focus is on data rendering, component structure, and layout.
+
+
+🧵 Code Quality Practices
+
+Pure components: no side effects inside JSX components
+Side effects (fetching) only in useEffect
+All functions + components documented
+Variables and functions named clearly and consistently
+Utility functions separated from UI code
+Minimal logic inside JSX for readability
+
+
+📄 License
+
+MIT License free to use, learn from, and extend.
+
+Project by Phillip Botha
