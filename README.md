@@ -1,147 +1,218 @@
-🎧 React Podcast Landing Page
+# 🎧 React Podcast Landing Page
 
-A responsive, data-driven podcast discovery landing page built with React, featuring dynamic API fetching, reusable components, and polished UI design.
+_A responsive, data‑driven podcast discovery page built with React._
 
-This project was developed for DJS03 and demonstrates key front-end skills including:
+This project was created as part of **DJS03** and demonstrates key front‑end engineering concepts including API data fetching, modular UI components, state management, responsive layout design, and full JSDoc documentation.
 
-Data fetching with useEffect
+---
 
-State management with useState
+## 📚 Table of Contents
 
-Modular React architecture
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Data Source](#data-source)
+- [User Stories (Rubric Mapping)](#user-stories-rubric-mapping)
+- [Technologies Used](#technologies-used)
+- [How to Run Locally](#how-to-run-locally)
+- [How to Interact With the App](#how-to-interact-with-the-app)
+- [Code Quality Practices](#code-quality-practices)
+- [Future Improvements](#future-improvements)
+- [License](#license)
 
-Responsive design with CSS Grid
+---
 
-Clean, readable, well-documented code using JSDoc
+## 📖 Overview
 
+This React application fetches real podcast data from an external API and displays it in a **dynamic, responsive grid layout**. Each podcast preview card includes:
+
+- Cover image
+- Podcast title
+- Number of seasons
+- Genre tags
+- Human‑readable “Last updated” text
+
+The goal of this project is to demonstrate real‑world React development patterns:
+
+- Side‑effects handled via `useEffect`
+- State management with `useState`
+- Clean separation of data logic and UI logic
+- Reusable, beginner‑friendly React components
+- Fully documented functions using **JSDoc**
+
+---
+
+## ⭐ Features
+
+### 🔄 Dynamic Data Fetching
+
+- Automatically retrieves all podcasts from  
+  `https://podcast-api.netlify.app/`
+- Shows loading and error states
+- Gracefully handles empty API results
+
+### 🧱 Modular Component Architecture
+
+- `<PodcastGrid />` — responsible for layout
+- `<PodcastCard />` — responsible for individual podcast previews
+- Pure components with no side effects
+
+### 🏷️ Rich Podcast Preview Cards
+
+Each card displays:
+
+- Image
+- Title
+- Seasons
+- Genre tags
+- Updated date formatted as “X days/months/years ago”
+
+Formatting logic is split into clean utility modules (`dateUtils.js`, `genreUtils.js`).
+
+### 📱 Fully Responsive Layout
+
+- CSS Grid with custom breakpoints
+- **1 → 2 → 3 → 4 → 5 columns** depending on screen size
+- Smooth hover effects and modern card styling
+- Works beautifully on mobile, tablet, laptop, and ultrawide displays
+
+### 🧼 Fully Documented Code (JSDoc)
+
+Each major component and function includes:
+
+- Parameter descriptions
+- Return types
+- Explanation of purpose and behaviour
+
+---
+
+## 📁 Project Structure
+
+```
 src/
 │
 ├── api/
 │   └── podcastApi.js        # Fetch helper using Fetch API
 │
 ├── components/
-│   ├── PodcastCard.jsx       # Displays a single podcast preview
-│   └── PodcastGrid.jsx       # Renders the responsive grid of cards
+│   ├── PodcastCard.jsx       # Displays a single podcast card
+│   └── PodcastGrid.jsx       # Renders the grid layout
 │
 ├── utils/
-│   ├── dateUtils.js          # Formats last-updated date
-│   └── genreUtils.js         # Maps genre IDs → readable genre names
+│   ├── dateUtils.js          # Formats last-updated text
+│   └── genreUtils.js         # Converts genre IDs → titles
 │
-├── App.jsx                   # Root component with data fetching + state
-├── App.css                   # Full responsive styling
-└── main.jsx                  # React root entry point
+├── App.jsx                   # Root component with state + data fetching
+├── App.css                   # Complete responsive styling
+└── main.jsx                  # React entry file
+```
 
-📡 Data Source
+This clean separation makes the project easy to read, extend, and maintain.
 
-All podcast data comes from the official API:
-https://podcast-api.netlify.app/
-The app fetches the data on initial load using useEffect, stores it in state, and passes it into reusable components.
+---
 
-⭐ Features
-🔄 Dynamic Data Fetching
-Automatically retrieves a list of podcasts from an external API.
-Loading state displayed while data is retrieved.
-Friendly error message if the API fails.
-Handles empty results gracefully.
-🧱 Reusable Component Architecture
-<PodcastGrid /> handles layout only.
-<PodcastCard /> handles rendering a single card.
-Following React best practices: UI = pure components, logic = App.jsx.
+## 📡 Data Source
 
+All data is fetched from the official Podcast API:  
+➡️ **https://podcast-api.netlify.app/**
 
-🏷️ Rich Podcast Preview Cards
-Each card displays:
-Cover image
-Podcast title
-Number of seasons
-Human-readable genre tags
-“Updated X days/months/years ago”
-All formatting is handled by helper utilities for clean code.
+Fetched once on initial load using `useEffect()`, then passed downward via props.
 
-📱 Fully Responsive Layout
+---
 
-CSS Grid with custom column breakpoints
-1 column (mobile) → 2 → 3 → 4 → 5 columns on ultrawide desktops
-Clean spacing, modern card design, hover effects
+## 🧩 User Stories (Rubric Mapping)
 
+| Code            | Description                                 | Status |
+| --------------- | ------------------------------------------- | ------ |
+| **P3.36**       | Fetch podcast data from API                 | ✅     |
+| **P3.37**       | Loading state                               | ✅     |
+| **P3.38**       | Error state                                 | ✅     |
+| **P3.39**       | useEffect + useState for fetching           | ✅     |
+| **P3.40**       | Display grid of podcast previews            | ✅     |
+| **P3.41**       | Reusable components                         | ✅     |
+| **P3.42–P3.47** | Image, title, seasons, genres, last updated | ✅     |
+| **P3.48**       | Clean layout                                | ✅     |
+| **P3.49**       | Responsive grid                             | ✅     |
+| **P3.50**       | Consistent fonts + spacing                  | ✅     |
+| **P3.51**       | JSDoc documentation                         | ✅     |
+| **P3.52**       | Code formatting                             | ✅     |
 
-🧼 JSDoc Documentation
+---
 
-Every major function and component includes:
-JSDoc parameters
-return types
-detailed descriptions
-This ensures readability and makes the code easy to explain.
+## 🛠️ Technologies Used
 
+- React (Vite)
+- JavaScript (ES6+)
+- CSS Grid / Flexbox
+- Fetch API
+- JSDoc
+- Utility helper modules
 
-🧩 User Stories (DJS03 Rubric Mapping)
-Code	Description	Status
-P3.36	Fetch podcast data from an API	✅ Completed
-P3.37	Display loading state	✅
-P3.38	Show error state if fetch fails	✅
-P3.39	Fetch using useEffect + store using useState	✅
-P3.40	Display grid of podcast previews	✅
-P3.41	Use reusable React components	✅
-P3.42–P3.47	Display image, title, seasons, genres, last updated	✅
-P3.48	Clean layout	✅
-P3.49	Responsive grid	✅
-P3.50	Consistent fonts, spacing, colour scheme	✅
-P3.51	JSDoc documentation	✅
-P3.52	Consistent code formatting	✅
+---
 
-🛠️ Technologies Used
-React (Vite)
-JavaScript (ES6+)
-CSS Grid / Flexbox
-Fetch API
-JSDoc
-Custom utility modules
+## 🧪 How to Run Locally
 
-
-🧪 How to Run Locally
-
-# Clone the repo
+```bash
+# Clone this repository
 git clone https://github.com/yourusername/djs03-react-podcast.git
-# Go into the project
+
+# Navigate into the folder
 cd djs03-react-podcast
+
 # Install dependencies
 npm install
-# Run development server
-npm run dev
 
-Then open:
+# Start dev server
+npm run dev
+```
+
+Then open:  
 👉 http://localhost:5173/
 
+---
 
-🖱️ How to Interact With the App
+## 🖱️ How to Interact With the App
 
-Visit the landing page
-The app will automatically fetch all podcasts
-You’ll first see:
-Loading message
-Then the full grid of podcast cards
-Scroll through and explore:
-Titles
-Seasons
-Genre tags
-Last updated date
-Resize the window to see the responsive grid adjust
+1. Open the landing page
+2. The app will automatically fetch all podcasts
+3. You will see:
+   - **Loading message**
+   - Followed by the **dynamic grid** of podcast previews
+4. Scroll to browse all podcasts
+5. Resize the window to see the responsive grid change
+6. Explore genres, seasons, and updated timestamps
 
-This is a simple landing page the focus is on data rendering, component structure, and layout.
+This project focuses on **data rendering**, **component structure**, and **layout design**.
 
+---
 
-🧵 Code Quality Practices
+## 🧵 Code Quality Practices
 
-Pure components: no side effects inside JSX components
-Side effects (fetching) only in useEffect
-All functions + components documented
-Variables and functions named clearly and consistently
-Utility functions separated from UI code
-Minimal logic inside JSX for readability
+- Pure components (no side effects in JSX)
+- Side effects only inside `useEffect`
+- Clear variable and function naming conventions
+- Utility modules for any data formatting
+- Minimal inline logic for readability
+- Consistent JSDoc across all major functions and components
 
+---
 
-📄 License
+## 🌱 Future Improvements
 
-MIT License free to use, learn from, and extend.
+Potential enhancements:
 
-Project by Phillip Botha
+- Podcast search bar
+- Genre filters or dropdowns
+- Pagination or infinite scroll
+- Detail page per podcast (React Router)
+- Light/dark theme toggle
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and extend.
+
+---
+
+### 👤 Project by **Phillip Botha**
